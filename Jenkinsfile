@@ -56,6 +56,17 @@ pipeline {
       }
     }
 
+    stage('Initialize Docker Swarm') {
+      steps {
+            sh '''
+            if [ "$(docker info --format "{{.Swarm.LocalNodeState}}")" != "active" ]; then
+                docker swarm init
+            else
+                echo "Docker Swarm already initialized"
+            fi
+            '''
+        }
+    }
     stage('Deploy To Docker Swarm') {
       steps {
         sh 'docker stack deploy -c docker-stack.yml ${STACK_NAME}'
