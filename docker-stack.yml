@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   web:
-    image: jagadish1607/eduwise-ecommerce:latest
+    image: jagadish1607/java-web-app:latest
     ports:
       - "8080:8080"
     deploy:
