@@ -4,9 +4,9 @@ pipeline {
   }
 
   environment {
-    APP_NAME = 'ecommerce-app'
-    DOCKERHUB_REPO = 'jagadish1607/eduwise-ecommerce'
-    IMAGE_TAG = "${env.BUILD_NUMBER}"
+    APP_NAME = 'java-web-app'
+    DOCKERHUB_REPO = 'jagadish1607/java-web-app'
+    IMAGE_TAG = "v${env.BUILD_NUMBER}"
     IMAGE_NAME = "${DOCKERHUB_REPO}:${IMAGE_TAG}"
     STACK_NAME = 'ecommerce'
     SERVICE_NAME = 'ecommerce_web'
@@ -24,7 +24,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Jagadish0716/eduwise-ecommerce.git']])
+        checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Jagadish0716/java-devops-project.git']])
       }
     }
 
@@ -51,7 +51,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
           sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
           sh 'docker push ${IMAGE_NAME}'
-          sh 'docker push ${DOCKERHUB_REPO}:latest'
+          //sh 'docker push ${DOCKERHUB_REPO}:latest'
         }
       }
     }

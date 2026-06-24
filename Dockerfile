@@ -1,7 +1,7 @@
 FROM tomcat:10.1-jdk17-temurin
 
 LABEL maintainer="jagadevopslearning@gmail.com"
-LABEL app="ecommerce-app"
+LABEL app="java-web-app"
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends curl \
